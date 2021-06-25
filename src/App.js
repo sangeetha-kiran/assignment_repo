@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+
 import './App.css';
 
+import AppStore from './AppStore';
+import UniversityList from "./components/UniversityList";
+import UniversityDetails from "./components/UniversityDetails";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const store = new AppStore();
+	return (
+		<div className="App">
+			<div className="container">
+				<Router>
+					<Switch>
+						<Route path="/" exact>
+						  <UniversityList store={store}/>
+						</Route>
+						<Route path="/details/:universityId" exact> 
+							<UniversityDetails store={store} />
+						</Route>
+					</Switch>
+				</Router>
+			</div>
+		</div>
+	);
 }
 
 export default App;
